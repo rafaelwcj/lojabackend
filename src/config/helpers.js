@@ -4,10 +4,10 @@ const crypto =  require('crypto');
 
 const mysql = require('mysql');
 const con = mysql.createConnection({
-    host: 'mysql742.umbler.com',
-    user: 'brecho',
-    password: 'brecho21',
-    database: 'brecho'
+    host: 'us-cdbr-east-03.cleardb.com',
+    user: 'baf6284e52aacd',
+    password: 'f617c154',
+    database: 'heroku_05d6a6bbb6c3d86'
 });
 
 con.connect(function(err) {

@@ -1,0 +1,17 @@
+{
+    "sqltools.connections": [
+        {
+            "mysqlOptions": {
+                "authProtocol": "default"
+            },
+            "previewLimit": 50,
+            "server": "us-cdbr-east-03.cleardb.com",
+            "port": 3306,
+            "driver": "MySQL",
+            "database": "heroku_05d6a6bbb6c3d86",
+            "username": "baf6284e52aacd",
+            "password": "f617c154",
+            "name": "connLoja"
+        }
+    ]
+}
