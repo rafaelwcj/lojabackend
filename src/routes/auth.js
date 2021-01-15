@@ -10,26 +10,14 @@ const jwt = require('jsonwebtoken');
 router.post('/login', async (req, res) => {
     let email = req.body.email;
     let password = req.body.password;
-    helper.database.table('users').filter({email: email})
-        .withFields([ 'password', 'id', 'email', 'role'])
-        .get().then(user => {
+    helper.database.query(`select password, id, email, role 
+        from users where email = '${email}'`, (err, user) => {
             if(user) {
-                // bcrypt.compare(password, user.password, function(err, isMatch) {
-                //     if (err) {
-                //       throw err
-                //     } else if (!isMatch) {
-                //       res.json({success: false, message: "Senha está incorreta." });
-                //     } else {
-                //         res.json({ success: true, user: user });
-                //     }
-                //   });
-            }
-            else {
-                res.json({ success: false, message: `Email não encontrado : ${email}` });
-            }
-        }).catch(err => res.json({ success: false, message: err }));
-});        
 
+            }
+    })
+    
+});        
 
 router.post('/register', (req, res) => {
   
