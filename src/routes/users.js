@@ -3,7 +3,7 @@ const router = express.Router();
 const {database} = require('../config/helpers');
 
 router.get('/', function (req, res) {
-    database.query("select * from users", (err, result) => {
+    database.query("SELECT * FROM heroku_05d6a6bbb6c3d86.users", (err, result) => {
         if (err) {
             res.json(err);
         } else {
@@ -19,7 +19,7 @@ router.get('/', function (req, res) {
 
 router.get('/:userId', (req, res) => {
     let userId = req.params.userId;
-    database.query(`select * from users where id = ${userId}`, (err, result) => {
+    database.query(`SELECT * FROM heroku_05d6a6bbb6c3d86.users where id = ${userId}`, (err, result) => {
         if (err) {
             res.json({ message: `Usuário não encontrado com ID: ${userId}` });
         } else {
@@ -30,7 +30,7 @@ router.get('/:userId', (req, res) => {
 
 router.patch('/:userId', async(req, res) => {
     let userId = req.params.userId;
-    await database.query(`select * from users where id = ${userId}`, (err, result) => {
+    await database.query(`SELECT * FROM heroku_05d6a6bbb6c3d86.users where id = ${userId}`, (err, result) => {
         if (result){
             let userEmail = req.body.email;
             let userPassword = req.body.password;
@@ -38,7 +38,7 @@ router.patch('/:userId', async(req, res) => {
             let userLastName = req.body.lname;
             let userUsername = req.body.username;
             let age = req.body.age;
-            database.query(`update users 
+            database.query(`update heroku_05d6a6bbb6c3d86.users 
             set email = ${ userEmail !== undefined ? userEmail : user.email },
                 password = ${ userPassword !== undefined ? userPassword : user.password },
                 username = ${ userUsername !== undefined ? userUsername : user.username },

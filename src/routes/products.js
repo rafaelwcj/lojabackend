@@ -25,8 +25,8 @@ router.get('/', function (req, res) {
     "p.quantity," +
     "p.description," +
     "p.image," +
-    "p.id from products p " +
-    "join categories c " +
+    "p.id from heroku_05d6a6bbb6c3d86.products p " +
+    "join heroku_05d6a6bbb6c3d86.categories c " +
     "on p.cat_id = c.id " + 
     "order by id", (err, prods) => {
         if (prods) {
@@ -49,8 +49,8 @@ router.get('/:prodId', (req, res) => {
     p.description,
     p.images,
     p.image,
-    p.id from products p 
-    join categories c 
+    p.id from heroku_05d6a6bbb6c3d86.products p 
+    join heroku_05d6a6bbb6c3d86.ategories c 
     on p.cat_id = c.id
     where p.id = ${productId} 
     order by id`, (err, prods) => {
@@ -86,8 +86,8 @@ router.get('/category/:catName', (req, res) => {
     p.quantity,
     p.description,
     p.image,
-    p.id from products p 
-    join categories c 
+    p.id from heroku_05d6a6bbb6c3d86.products p 
+    join heroku_05d6a6bbb6c3d86.categories c 
     on p.cat_id = c.id
     where c.title like '%${cat_title}%' order by id`, (err, prods) => {
         if (prods) {
@@ -109,7 +109,7 @@ router.post('/register', async (req, res) => {
     let price = req.body.price;
     let quantity = req.body.quantity;
 
-    let sql = `insert into products (title,
+    let sql = `insert into heroku_05d6a6bbb6c3d86.products (title,
         image,
         description,
         price,
@@ -136,7 +136,7 @@ router.post('/register', async (req, res) => {
 
 router.delete('/:Id', (req, res) => {
     let id = req.params.Id;
-    database.query(`delete from products where id = ${id}`, (err, result) => {
+    database.query(`delete from heroku_05d6a6bbb6c3d86.products where id = ${id}`, (err, result) => {
         if (result) {
             res.json({ success: true, message: 'Produto excluído com sucesso.' });
         } else {
