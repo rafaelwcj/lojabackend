@@ -7,7 +7,7 @@ const { default: ContactRestfulModelCollection } = require('nylas/lib/models/con
 
 router.get('/', (req, res) => {
     database.query("select o.id, p.title, p.description, p.price, u.username " +
-            "from heroku_05d6a6bbb6c3d86.orders_details od join heroku_05d6a6bbb6c3d86.order o on o.id = od.order_id " +
+            "from orders_details od join order o on o.id = od.order_id " +
             "join products p on p.id = od.product_id join users u on u.id = o.user_id", (err, result) => {
                 if(result) {
                     res.json(orders);
@@ -20,12 +20,12 @@ router.get('/', (req, res) => {
 router.get('/:id', async (req, res) => {
     let orderId = req.params.id;
     database.query(`select o.id, p.title, p.description, p.price, p.image, od.quantity as quantityOrdered
-    from heroku_05d6a6bbb6c3d86.orders_details od 
-    join heroku_05d6a6bbb6c3d86.orders o 
+    from orders_details od 
+    join orders o 
     on o.id = od.order_id 
-    join heroku_05d6a6bbb6c3d86.products p 
+    join products p 
     on p.id = od.product_id 
-    join heroku_05d6a6bbb6c3d86.users u on u.id = o.user_id
+    join users u on u.id = o.user_id
     where o.id = ${orderId}`, (err, result) => {
         if(result) {
             res.json(result);
@@ -45,7 +45,7 @@ router.post('/confirmation', async (req, res) => {
         subject: "Confirmação novo pedido",
         body: template,
         to: [{name: email, email: email}],
-        bcc: [{name: email, email: "rafael.wjesus@gmail.com"}]
+        bcc: [{name: email, email: "kjesus@gmail.com"}]
     });
     draft.send().then();
 });
@@ -55,12 +55,12 @@ router.post('/new', async (req, res) => {
 
     if (userId !== null && userId > 0) {
 
-        database.query(`insert into heroku_05d6a6bbb6c3d86.orders (user_id) values (${userId})`, (err, ret) => {
+        database.query(`insert into orders (user_id) values (${userId})`, (err, ret) => {
 
             if (ret.insertId > 0) {
                 products.forEach(async (p) => {
 
-                    await database.query(`select title, price, quantity from heroku_05d6a6bbb6c3d86.products where id = ${p.id}`, (err, data) => {
+                    await database.query(`select title, price, quantity from products where id = ${p.id}`, (err, data) => {
 
                     let inCart = parseInt(p.incart);
 
@@ -75,9 +75,9 @@ router.post('/new', async (req, res) => {
                         data.quantity = 0;
                     }
 
-                    database.query(`insert into heroku_05d6a6bbb6c3d86.orders_details (order_id, product_id, quantity) 
+                    database.query(`insert into orders_details (order_id, product_id, quantity) 
                         values (${ret.insertId}, ${p.id}, ${inCart})`, (err, ord) => {
-                            database.query(`update heroku_05d6a6bbb6c3d86.products set quantity = ${data.quantity} where id = ${p.id}`)
+                            database.query(`update products set quantity = ${data.quantity} where id = ${p.id}`)
                         });
                     });
 

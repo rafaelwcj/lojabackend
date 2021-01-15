@@ -1,14 +1,13 @@
 const jwt = require('jsonwebtoken');
 const crypto =  require('crypto');
-//const bcrypt = require('bcrypt');
 
 const mysql = require('mysql');
 const con = mysql.createConnection({
-    connectionLimit : 900000,
-    host: 'us-cdbr-east-03.cleardb.com',
-    user: 'baf6284e52aacd',
-    password: 'f617c154',
-    database: 'heroku_05d6a6bbb6c3d86'
+    connectionLimit : 1000,
+    host: 'mysql742.umbler.com',
+    user: 'brecho',
+    password: 'brecho21',
+    database: 'brecho'
 });
                                
 con.connect(function(err) {

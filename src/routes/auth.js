@@ -30,7 +30,7 @@ router.post('/register', (req, res) => {
         let role = req.body.role;
         let address = req.body.address;
 
-        let sqlUsers = `insert into heroku_05d6a6bbb6c3d86.users (username,
+        let sqlUsers = `insert into users (username,
             password,
             email,
             role,
@@ -55,7 +55,7 @@ router.post('/register', (req, res) => {
                     let telefone = address[0].telefone;
                     let observacao = address[0].observacao;
 
-                    let sqlAddress = `insert into heroku_05d6a6bbb6c3d86.addresses (cep,
+                    let sqlAddress = `insert into addresses (cep,
                         endereco,
                         cidade,
                         estado,
