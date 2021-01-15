@@ -6,7 +6,7 @@ const router = express.Router();
 const helper = require('../config/helpers');
 const jwt = require('jsonwebtoken');
 //const bcrypt = require('bcrypt');       
-
+            
 router.post('/login', async (req, res) => {
     let email = req.body.email;
     let password = req.body.password;
