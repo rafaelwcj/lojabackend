@@ -56,4 +56,32 @@ router.patch('/:userId', async(req, res) => {
 
 });
 
+router.post('/contact/register', (req, res) => {
+  
+    let name = req.body.name;
+    let phone = req.body.phone;
+    let description = req.body.description;
+    let email = req.body.email;
+
+    let sql = `insert into contact (name,
+        phone,
+        description,
+        email,
+        data)
+         values (
+        '${name}',
+        '${phone}',
+        '${description}',
+        '${email}',
+        '${(new Date().toLocaleDateString())}')`
+
+    database.query(sql, (err, result) => {
+        if(result.insertId > 0) {
+            res.json({ success: true, message: 'Contato realizado com sucesso.' }); 
+        } else {
+            res.json({ success: false, message: 'Houve falha ao cadastrar o contato.' }); 
+        }
+    });
+});
+
 module.exports = router;

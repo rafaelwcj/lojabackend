@@ -42,7 +42,7 @@ router.get('/', function (req, res) {
 
 router.get('/:prodId', (req, res) => {
     let productId = req.params.prodId;
-    database.query(`select distinct c.title as category,
+    database.query(`select c.title as category,
     p.title as name,
     p.price,
     p.quantity,
@@ -50,7 +50,7 @@ router.get('/:prodId', (req, res) => {
     p.images,
     p.image,
     p.id from products p 
-    join ategories c 
+    join categories c 
     on p.cat_id = c.id
     where p.id = ${productId} 
     order by id`, (err, prods) => {
@@ -108,11 +108,13 @@ router.post('/register', async (req, res) => {
     let category = req.body.category;
     let description = req.body.description;
     let image = req.body.image;
+    let images = req.body.images;
     let price = req.body.price;
     let quantity = req.body.quantity;
 
     let sql = `insert into products (title,
         image,
+        images,
         description,
         price,
         quantity,
@@ -120,6 +122,7 @@ router.post('/register', async (req, res) => {
         cat_id) values (
         '${name}',
         '${image}',
+        '${images}',
         '${description}',
         '${price}',
         ${quantity},

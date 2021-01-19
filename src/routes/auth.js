@@ -79,9 +79,12 @@ router.post('/register', (req, res) => {
                 res.json({ success: false, message: 'Cadastro não realizado.' }); 
             }
 
-        });
-
     });
+
+});
+
+
+
        
 
 module.exports = router;

@@ -32,11 +32,13 @@ const productsRouter = require('./routes/products');
 const ordersRouter = require('./routes/order');
 const usersRouter = require('./routes/users');
 const authRouter = require('./routes/auth');
+const correios = require('./routes/correios');
 
 app.use('/api/products', productsRouter);
 app.use('/api/orders', ordersRouter);
 app.use('/api/users', usersRouter);
 app.use('/api/auth', authRouter);
+app.use('/api/correios', correios);
 
 const port = process.env.port || 3000;
 

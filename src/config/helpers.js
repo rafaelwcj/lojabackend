@@ -4,10 +4,10 @@ const crypto =  require('crypto');
 const mysql = require('mysql');
 const con = mysql.createConnection({
     connectionLimit : 1000,
-    host: 'mysql742.umbler.com',
-    user: 'brecho',
-    password: 'brecho21',
-    database: 'brecho'
+    host: 'localhost',
+    user: 'root',
+    password: '',
+    database: 'mega_shop'
 });
                                
 con.connect(function(err) {
