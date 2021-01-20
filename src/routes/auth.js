@@ -54,6 +54,7 @@ router.post('/register', (req, res) => {
                     let estado = address[0].estado;
                     let telefone = address[0].telefone;
                     let observacao = address[0].observacao;
+                    let entrega = address[0].entrega;
 
                     let sqlAddress = `insert into addresses (cep,
                         endereco,
@@ -61,7 +62,8 @@ router.post('/register', (req, res) => {
                         estado,
                         telefone,
                         observacao,
-                        user_id)
+                        user_id,
+                        entrega)
                          values (
                         '${cep}',
                         '${endereco}',
@@ -69,7 +71,8 @@ router.post('/register', (req, res) => {
                         '${estado}',
                         '${telefone}',
                         '${observacao || null}',
-                        ${result.insertId})`
+                        ${result.insertId},
+                        '${entrega}')`
 
                     helper.database.query(sqlAddress);
 
